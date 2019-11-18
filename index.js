@@ -1,3 +1,5 @@
+//import { LOADIPHLPAPI } from "dns";
+
 /*
  * CURRENCY CONVERTER RELOADED
  * Author: <your name here>
@@ -65,4 +67,4 @@ if (originalCurrency === 'EUR' && targetCurrency === 'USD') {
 }
 
 // Ausgabe 'output'
-console.log('Das Ergebnis sind: ' + output);
+console.log('Das Ergebnis ist: ' + output);

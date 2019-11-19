@@ -45,32 +45,26 @@ if (args.length < 3) {
 // Variable 'output' deklarieren
 // let output;
 
-// Variable 'Faktoren EUR' deklarieren
+// Objekt Währungen mit Wechselkurs und Symbolen deklarieren
 const currencies = {
-  EUR: 1,
-  USD: 1.11,
-  CZK: 25.58,
-  BWP: 12.04,
-  AUD: 1.63,
-  CNY: 7.78,
-  TRY: 6.34,
-  ZAR: 16.33,
-  symbols: {
-    EUR: '€',
-    USD: 'US$',
-    CZK: 'Kč',
-    BWP: 'P',
-    AUD: 'AU$',
-    CNY: 'RMB¥',
-    TRY: '₺',
-    ZAR: 'R'
-  }
+  EUR: {rate: 1, symbol: '€'},
+  USD: {rate: 1.11, symbol: 'US$'},
+  CZK: {rate: 25.58, symbol: 'Kč'},
+  BWP: {rate: 12.04, symbol: 'P'},
+  AUD: {rate: 1.63, symbol: 'AU$'},
+  CNY: {rate: 7.78, symbol: 'RMB¥'},
+  TRY: {rate: 6.34, symbol: '₺'},
+  ZAR: {rate: 16.33, symbol: 'R'}
+  /*symbols: {
+    EUR: '€', USD: 'US$',CZK: 'Kč',BWP: 'P',AUD: 'AU$',CNY: 'RMB¥',TRY: '₺',ZAR: 'R'
+  }*/
 }
 
-const amountInEur = amount / currencies[originalCurrency];
+const amountInEur = amount / currencies[originalCurrency].rate;
 
-const output = amountInEur * currencies[targetCurrency];
+const output = amountInEur * currencies[targetCurrency].rate;
   
 // Ausgabe 'output'
-console.log(`Das Ergebnis ist: ${output}${currencies['symbols'][targetCurrency]}`);
+console.log(`Das Ergebnis ist: ${output}${currencies[targetCurrency].symbol}`);
+console.log('Das Ergebnis ist: ' + output + currencies[targetCurrency].symbol);
   

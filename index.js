@@ -46,7 +46,7 @@ if (args.length < 3) {
 // let output;
 
 // Variable 'Faktoren EUR' deklarieren
-const currencys = {
+const currencies = {
   EUR: 1,
   USD: 1.11,
   CZK: 25.58,
@@ -57,9 +57,9 @@ const currencys = {
   ZAR: 16.33
 }
 
-const amountInEur = amount / currencys[originalCurrency];
+const amountInEur = amount / currencies[originalCurrency];
 
-const output = amountInEur * currencys[targetCurrency];
+const output = amountInEur * currencies[targetCurrency];
 
 
 

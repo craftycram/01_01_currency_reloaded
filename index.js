@@ -1,5 +1,6 @@
 //import { LOADIPHLPAPI } from "dns";
 
+
 /*
  * CURRENCY CONVERTER RELOADED
  * Author: <your name here>
@@ -46,6 +47,7 @@ if (args.length < 3) {
 // let output;
 
 // Objekt Währungen mit Wechselkurs und Symbolen deklarieren
+/*
 const currencies = {
   EUR: {rate: 1, symbol: '€'},
   USD: {rate: 1.11, symbol: 'US$'},
@@ -55,16 +57,27 @@ const currencies = {
   CNY: {rate: 7.78, symbol: 'RMB¥'},
   TRY: {rate: 6.34, symbol: '₺'},
   ZAR: {rate: 16.33, symbol: 'R'}
-  /*symbols: {
-    EUR: '€', USD: 'US$',CZK: 'Kč',BWP: 'P',AUD: 'AU$',CNY: 'RMB¥',TRY: '₺',ZAR: 'R'
-  }*/
-}
+  //symbols: {
+  //  EUR: '€', USD: 'US$',CZK: 'Kč',BWP: 'P',AUD: 'AU$',CNY: 'RMB¥',TRY: '₺',ZAR: 'R'
+  //}
+}*/
 
-const amountInEur = amount / currencies[originalCurrency].rate;
+let download;
 
-const output = amountInEur * currencies[targetCurrency].rate;
+const request = require('request');
+request('https://api.exchangeratesapi.io/latest', function (error, response, body) {
+  //console.error('error:', error); // Print the error if one occurred
+  //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  //console.log('body:', body); // Print the HTML for the Google homepage.
+  download = JSON.parse(body);
+
+  const amountInEur = amount / download.rates[originalCurrency];
+
+  const output = amountInEur * download.rates[targetCurrency];
   
-// Ausgabe 'output'
-console.log(`Das Ergebnis ist: ${output}${currencies[targetCurrency].symbol}`);
-console.log('Das Ergebnis ist: ' + output + currencies[targetCurrency].symbol);
+  // Ausgabe 'output'
+  console.log(`Das Ergebnis ist: ${output}`);
+
   
+});
+

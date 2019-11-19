@@ -57,11 +57,17 @@ const currencies = {
   ZAR: 16.33
 }
 
-const amountInEur = amount / currencies[originalCurrency];
+try {
+  const amountInEur = amount / currencies[originalCurrency];
 
-const output = amountInEur * currencies[targetCurrency];
+  const output = amountInEur * currencies[targetCurrency];
+  // Ausgabe 'output'
+  console.log('Das Ergebnis ist: ' + output);
+
+} catch (error) {
+  console.log(`Fehler: ${error}`)
+}
 
 
 
-// Ausgabe 'output'
-console.log('Das Ergebnis ist: ' + output);
+

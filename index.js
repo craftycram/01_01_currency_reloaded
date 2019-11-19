@@ -54,20 +54,23 @@ const currencies = {
   AUD: 1.63,
   CNY: 7.78,
   TRY: 6.34,
-  ZAR: 16.33
+  ZAR: 16.33,
+  symbols: {
+    EUR: '€',
+    USD: 'US$',
+    CZK: 'Kč',
+    BWP: 'P',
+    AUD: 'AU$',
+    CNY: 'RMB¥',
+    TRY: '₺',
+    ZAR: 'R'
+  }
 }
 
-try {
-  const amountInEur = amount / currencies[originalCurrency];
+const amountInEur = amount / currencies[originalCurrency];
 
-  const output = amountInEur * currencies[targetCurrency];
-  // Ausgabe 'output'
-  console.log('Das Ergebnis ist: ' + output);
-
-} catch (error) {
-  console.log(`Fehler: ${error}`)
-}
-
-
-
-
+const output = amountInEur * currencies[targetCurrency];
+  
+// Ausgabe 'output'
+console.log(`Das Ergebnis ist: ${output}${currencies['symbols'][targetCurrency]}`);
+  

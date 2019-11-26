@@ -48,43 +48,7 @@ if (args.length < 3) {
 
 // Objekt Währungen mit Wechselkurs und Symbolen deklarieren
 
-const currencies = {
-  EUR: {
-    rate: 1,
-    symbol: '€'
-  },
-  USD: {
-    rate: 1.11,
-    symbol: 'US$'
-  },
-  CZK: {
-    rate: 25.58,
-    symbol: 'Kč'
-  },
-  BWP: {
-    rate: 12.04,
-    symbol: 'P'
-  },
-  AUD: {
-    rate: 1.63,
-    symbol: 'AU$'
-  },
-  CNY: {
-    rate: 7.78,
-    symbol: 'RMB¥'
-  },
-  TRY: {
-    rate: 6.34,
-    symbol: '₺'
-  },
-  ZAR: {
-    rate: 16.33,
-    symbol: 'R'
-  }
-  //symbols: {
-  //  EUR: '€', USD: 'US$',CZK: 'Kč',BWP: 'P',AUD: 'AU$',CNY: 'RMB¥',TRY: '₺',ZAR: 'R'
-  //}
-}
+const currencies = {EUR:{rate:1,symbol:'€'},USD:{rate:1.11,symbol:'US$'},CZK:{rate:25.58,symbol:'Kč'},BWP:{rate:12.04,symbol:'P'},AUD:{rate:1.63,symbol:'AU$'},CNY:{rate:7.78,symbol:'RMB¥'},TRY:{rate:6.34,symbol:'₺'},ZAR:{rate:16.33,symbol:'R'}};
 
 let download;
 
@@ -96,14 +60,13 @@ request('https://api.exchangeratesapi.io/latest', function (error, response, bod
   download = JSON.parse(body);
 
   try {
-    for (const rates in download.rates) {
-      if (download.hasOwnProperty(rates)) {
-        const element = download.rates[rates];
-        currencies[element].rate = download.rates[element];
-      } else if (download.hasOwnProperty(rates) === false) {
-        currencies[rates] = {};
-        currencies[rates].rate = download.rates[rates];
-
+    for (const pos in download.rates) {
+      if (currencies.hasOwnProperty(pos)) {
+        //const element = download.rates[rates];
+        currencies[pos].rate = download.rates[pos];
+      } else if (currencies.hasOwnProperty(pos) === false) {
+        currencies[pos] = {};
+        currencies[pos].rate = download.rates[pos];
       }
     }
   } catch (error) {
@@ -118,9 +81,12 @@ request('https://api.exchangeratesapi.io/latest', function (error, response, bod
   const output = amountInEur * currencies[targetCurrency].rate;
 
   // Ausgabe 'output'
-  console.log(`Das Ergebnis ist: ${output}${currencies[targetCurrency].symbol}`);
-
-  console.log(currencies);
+  if (currencies[targetCurrency].hasOwnProperty('symbol')) {
+    console.log(`Das Ergebnis ist: ${output}${currencies[targetCurrency].symbol}`);
+  } else {
+    console.log(`Das Ergebnis ist: ${output} ${targetCurrency}`);
+  }
+  //console.log(currencies);
   
 
 });
